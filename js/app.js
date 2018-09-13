@@ -70,15 +70,22 @@ game_start.addEventListener("click", () => {
 
 function checkLetter (chosen_letter) {
     const letters = document.querySelectorAll(".letter");
-    
+    let letterFound = "";
 
     for (let i = 0; i < letters.length; i += 1) {
         
+        
         if (chosen_letter === letters[i].textContent) {
-            var letterFound = chosen_letter;
-            letters[i].className += "show";        
-        } 
+             letterFound = chosen_letter;
+            letters[i].className += "show";  
+                 
+        } else  {
+            letterFound = "null"
+        }
+        
     }
+
+    return letterFound;
 }
 
 
@@ -87,11 +94,22 @@ keyboard.addEventListener("click", (event) => {
 
     const a = event.target;
     const b = a.textContent;
+    
 
     if (a.tagName == "BUTTON") {
         a.className = "chosen";
         a.setAttribute("disabled", true);
-        checkLetter(b);
+        const c = checkLetter(b);
+        console.log(c);
+
+        if (c === "null") {
+            const tries = document.querySelectorAll(".tries");
+            console.log(tries[missed].firstChild)
+            tries[missed].firstChild.setAttribute("src","images/lostHeart.png");
+            missed += 1;
+
+        }
+        
     }
 
 });
