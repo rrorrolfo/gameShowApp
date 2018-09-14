@@ -1,8 +1,6 @@
 ////////////  VARIABLES  /////////////
 
 const phrases = [
-    "you talkin to me",
-    "i am your father",
     "why so serious",
     "bond James Bond",
     "i ll be back",
@@ -13,9 +11,9 @@ const phrases = [
 
 const start_screen = document.querySelector("#overlay");
 const game_start = document.querySelectorAll(".btn__reset")[0];
-const select_phrase = Math.floor(Math.random() * 10);
 const keyboard = document.querySelector("#qwerty");
 const phrase = document.querySelector("#phrase");
+
 
 let missed = 0;
 
@@ -24,9 +22,9 @@ let missed = 0;
 /// selects randonly the phrase when the person clicks the start game button
 
 function getRandomPhraseAsArray(arr) {
-    var a =  arr[select_phrase];
+    var a =  arr[Math.floor(Math.random() * 6)];
     const b = [];
-
+    
     for (let i = 0; i < a.length; i += 1) {
         b.push(a.charAt(i));
     }
@@ -60,7 +58,34 @@ function addPhraseToDisplay(arr){
 game_start.addEventListener("click", () => {
     start_screen.style.display = "none";
 
-    const a = getRandomPhraseAsArray(phrases);
+    // Reset the game
+
+        // Resets the phrase to guess
+    const letter = document.querySelector("#phrase ul");
+    letter.textContent = "";
+
+        // Resets styling of buttons to default
+    const reset_keyboard = document.querySelectorAll(".keyrow button");
+
+    for (let i = 0; i < reset_keyboard.length; i += 1) {
+        reset_keyboard[i].className = " ";
+        reset_keyboard[i].removeAttribute("disabled");
+    }
+
+        // Resets hearts images to default (5 lives)
+
+    const tries = document.querySelectorAll(".tries");
+            
+    for (let i = 0; i < tries.length; i += 1) {
+        tries[i].firstChild.setAttribute("src","images/liveHeart.png");
+    }
+
+        // Reset missed attempts score
+
+        missed = 0;
+    
+    // SETS PHRASE TO GUESS
+    let a = getRandomPhraseAsArray(phrases);
     addPhraseToDisplay(a);
 
 });
@@ -84,7 +109,30 @@ function checkLetter (chosen_letter) {
     return letterFound
 }
 
-//need to fix bug why is null being passes all the times?
+//// CHECKS IF PLAYER GUESSED CORRECT ANSWER
+
+function checkWin() {
+    const letters = document.querySelectorAll(".letter");
+    const shown_letters = document.querySelectorAll(".show");
+    const status_message = start_screen.firstChild.nextElementSibling;
+    const cta_replay = start_screen.lastChild.previousElementSibling;
+    
+    if (letters.length === shown_letters.length) {
+        start_screen.style.display = "flex";
+        start_screen.className = "win";
+        status_message.textContent = "YOU WON";
+        cta_replay.textContent = "Play Again";
+    } 
+    
+    if (missed >= 5) {
+        start_screen.style.display = "flex";
+        start_screen.className = "lose";
+        status_message.textContent = "YOU LOST";
+        cta_replay.textContent = "Play Again";
+    }
+}
+
+/// GAMEPLAY EVENT STARTER
 
 keyboard.addEventListener("click", (event) => {
 
@@ -95,7 +143,6 @@ keyboard.addEventListener("click", (event) => {
         a.className = "chosen";
         a.setAttribute("disabled", true);
         const c = checkLetter(b);
-        console.log(c);
 
         if (c === "null") {
             const tries = document.querySelectorAll(".tries");
@@ -105,6 +152,8 @@ keyboard.addEventListener("click", (event) => {
         }
         
     }
+
+    checkWin();
 
 });
 
