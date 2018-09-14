@@ -5,10 +5,8 @@ const phrases = [
     "i am your father",
     "why so serious",
     "bond James Bond",
-    "i see dead people",
     "i ll be back",
     "here is Johnny",
-    "hasta la vista baby",
     "my precious",
 ];
 
@@ -45,10 +43,12 @@ function addPhraseToDisplay(arr){
         const li = document.createElement("li");
         
         letter.appendChild(li);
-        li.textContent = arr[i];
+        li.textContent = arr[i].toUpperCase();
 
         if (li.textContent !== " ") {
             li.className = "letter"
+        } else {
+            li.className = "space"
         }
     }
 
@@ -69,32 +69,27 @@ game_start.addEventListener("click", () => {
 ///// CHECKS THE LETTER 
 
 function checkLetter (chosen_letter) {
+    const selected_letter = chosen_letter.toUpperCase();
     const letters = document.querySelectorAll(".letter");
-    let letterFound = "";
+    let letterFound = "null";
 
     for (let i = 0; i < letters.length; i += 1) {
         
-        
-        if (chosen_letter === letters[i].textContent) {
-             letterFound = chosen_letter;
-            letters[i].className += "show";  
-                 
-        } else  {
-            letterFound = "null"
+         if (selected_letter === letters[i].textContent) {
+            letterFound = selected_letter;
+            letters[i].className += " show";
         }
-        
     }
 
-    return letterFound;
+    return letterFound
 }
 
-
+//need to fix bug why is null being passes all the times?
 
 keyboard.addEventListener("click", (event) => {
 
     const a = event.target;
     const b = a.textContent;
-    
 
     if (a.tagName == "BUTTON") {
         a.className = "chosen";
@@ -104,7 +99,6 @@ keyboard.addEventListener("click", (event) => {
 
         if (c === "null") {
             const tries = document.querySelectorAll(".tries");
-            console.log(tries[missed].firstChild)
             tries[missed].firstChild.setAttribute("src","images/lostHeart.png");
             missed += 1;
 
