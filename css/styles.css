@@ -91,13 +91,18 @@ button {
 }
 
 .space {
-  width: 15px;
+  width: 25px;
 }
 
 .show {
   color: #000;
   background-color: #76CE82;
+  transition: transform 1s;
+  transform: scale(1.1);
+  margin: 0 5px;
+
 }
+
 
 /* Keyboard */
 
@@ -138,6 +143,7 @@ button {
   left: 0;
   right: 0;
   border-radius: 5px;
+  z-index: 99999;
 }
 
 .title {
