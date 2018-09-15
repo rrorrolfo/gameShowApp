@@ -72,7 +72,7 @@ game_start.addEventListener("click", () => {
         reset_keyboard[i].removeAttribute("disabled");
     }
 
-        // Resets hearts images to default (5 lives)
+        // Resets hearts images to default (5 lifes)
 
     const tries = document.querySelectorAll(".tries");
             
@@ -120,14 +120,14 @@ function checkWin() {
     if (letters.length === shown_letters.length) {
         start_screen.style.display = "flex";
         start_screen.className = "win";
-        status_message.textContent = "YOU WON";
+        status_message.textContent = "YOU WON!!!";
         cta_replay.textContent = "Play Again";
     } 
     
     if (missed >= 5) {
         start_screen.style.display = "flex";
         start_screen.className = "lose";
-        status_message.textContent = "YOU LOST";
+        status_message.textContent = "YOU LOST :(";
         cta_replay.textContent = "Play Again";
     }
 }
@@ -145,6 +145,7 @@ keyboard.addEventListener("click", (event) => {
         const c = checkLetter(b);
 
         if (c === "null") {
+            a.className += " chosen_mistaken"; 
             const tries = document.querySelectorAll(".tries");
             tries[missed].firstChild.setAttribute("src","images/lostHeart.png");
             missed += 1;
