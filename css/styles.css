@@ -4,10 +4,9 @@
 /* Variables */
 
 :root {
-  --color-win: rgba(120, 207, 130, 0.966);
+  --color-win: #78CF82;
   --color-lose: #D94545;
   --color-start: #5b85b7;
-  --color-yellow: rgba(255, 208, 0, 0.767);
   --color-neutral: #445069;
   --color-neutral-light: #D2D2D2;
   --color-keys: #37474F;
@@ -28,7 +27,6 @@ body {
   flex-direction: column;
   display: flex;
   height: 100vh;
-  background-color: rgb(0, 0, 0);
 }
 
 li, ol, ul {
@@ -74,7 +72,7 @@ button {
 /* Title */
 
 .header {
-  color: var(--color-yellow);
+  color: #45aaf2;;
 }
 
 /* Phrase */
@@ -86,7 +84,7 @@ button {
   padding: 20px 1px 0 1px;
   margin-right: 2px;
   color: transparent;
-  background: rgb(219, 217, 108);
+  background: var(--color-neutral-light);
   border-radius: 5px;
 }
 
@@ -126,8 +124,9 @@ button {
   padding: 8px;
   margin: 50px auto;
   background: #FFFFFF;
-  border-radius: 5px;
+  border-radius: 50px;
   font-size: var(--font-size-medium);
+ 
 }
 
 /* Overlay */
@@ -147,16 +146,16 @@ button {
 }
 
 .title {
-  color: var(--color-yellow);
+  color: #FFF;
 }
 
 .start {
-  background-color: rgba(3, 3, 3, 0.973);
+  background-color: #45aaf2;
 }
 
 .start a {
-  color: #000;
-  background-color: rgb(219, 217, 108);
+  color: #45aaf2;
+  
 }
 
 .win {
